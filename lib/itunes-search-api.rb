@@ -12,7 +12,11 @@ class ITunesSearchAPI
 
     def lookup(query={})
       if results = get("/lookup", :query => query)["results"]
-        results[0]
+        if query[:include_all_results]
+          results
+        else
+          results[0]
+        end
       end
     end
   end
